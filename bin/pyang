@@ -365,7 +365,7 @@ Validates the YANG module in <filename> (or stdin), and all its dependencies."""
 
         for filename in filenames:
             try:
-                fd = io.open(filename, "r", encoding="utf-8")
+                fd = io.open(filename, "r", encoding="utf-8", errors='ignore')
                 text = fd.read()
                 if o.verbose:
                     util.report_file_read(filename, "(CL)")
@@ -400,7 +400,7 @@ Validates the YANG module in <filename> (or stdin), and all its dependencies."""
     # apply deviations
     for filename in ctx.opts.deviations:
         try:
-            fd = io.open(filename, "r", encoding="utf-8")
+            fd = io.open(filename, "r", encoding="utf-8", errors='ignore')
             text = fd.read()
         except IOError as ex:
             sys.stderr.write("error %s: %s\n" % (filename, ex))

@@ -144,7 +144,7 @@ class FileRepository(Repository):
         in_format, absfilename = handle
         fd = None
         try:
-            fd = io.open(absfilename, "r", encoding="utf-8")
+            fd = io.open(absfilename, "r", encoding="utf-8", errors='ignore')
             text = fd.read()
             if self.verbose:
                 util.report_file_read(absfilename)

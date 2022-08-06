@@ -208,9 +208,6 @@ levelcnt = [0]*100
 def emit_bodystart(modules, fd, ctx):
     fd.write("""
 <body onload="collapseAllRows();">
-<a href="http://www.tail-f.com">
-   <img src="""+get_tailf_logo()+""" />
-</a>
 <div class="app">
 <div style="background: #eee; border: dashed 1px #000;">
 """)
@@ -231,8 +228,8 @@ def emit_bodystart(modules, fd, ctx):
             prstr = pr.arg
 
         if module.keyword == 'module':
-            fd.write("""<h1> %s: <font color=blue>%s%s</font>, Namespace:
-                     <font color=blue>%s</font>, Prefix:
+            fd.write("""<h1> %s: <font color=blue>%s%s</font>, 命名空间:
+                     <font color=blue>%s</font>, 前缀:
                      <font color=blue>%s</font></h1> \n"""
                      % (module.keyword.capitalize(),
                         module.arg,
@@ -250,16 +247,16 @@ def emit_bodystart(modules, fd, ctx):
   <!-- specifing one or more widths keeps columns
        constant despite changes in visible content -->
   <th align=left>
-     Element
-     <a href='#' onclick='expandAllRows();'>[+]Expand all</a>
-     <a href='#' onclick='collapseAllRows();'>[-]Collapse all</a>
+     元素
+     <a href='#' onclick='expandAllRows();'>[+]展开所有</a>
+     <a href='#' onclick='collapseAllRows();'>[-]折叠所有</a>
   </th>
-  <th align=left>Schema</th>
-  <th align=left>Type</th>
-  <th align=left>Flags</th>
-  <th align=left>Opts</th>
-  <th align=left>Status</th>
-  <th align=left>Path</th>
+  <th align=left>节点类型</th>
+  <th align=left>数据类型</th>
+  <th align=left>属性</th>
+  <th align=left>选项</th>
+  <th align=left>状态</th>
+  <th align=left>路径</th>
 </tr>
 """)
 
@@ -287,7 +284,8 @@ def emit_tree(modules, fd, ctx, path):
 
         levelcnt[1] += 1
         chs = [ch for ch in module.i_children
-               if ch.keyword in statements.data_definition_keywords]
+               if True]
+               # if ch.keyword in statements.data_definition_keywords]
         if path is not None and len(path) > 0:
             chs = [ch for ch in chs if ch.arg == path[0]]
             path = path[1:]
@@ -515,9 +513,9 @@ def get_flags_str(s):
     elif s.keyword == 'notification':
         return ''
     elif s.i_config:
-        return 'config'
+        return '可配置'
     else:
-        return 'no config'
+        return '非可配置'
 
 def get_typename(s):
     t = s.search_one('type')

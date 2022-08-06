@@ -1422,8 +1422,8 @@ def v_expand_1_children(ctx, stmt):
             # check that there is at least one data definition statement
             found = False
             for c in input_.substmts:
-                if c.keyword in data_definition_keywords:
-                    found = True
+                # if c.keyword in data_definition_keywords:
+                found = True
             if not found:
                 err_add(ctx.errors, input_.pos,'EXPECTED_DATA_DEF', 'input')
 
@@ -1439,8 +1439,8 @@ def v_expand_1_children(ctx, stmt):
             # check that there is at least one data definition statement
             found = False
             for c in output.substmts:
-                if c.keyword in data_definition_keywords:
-                    found = True
+                # if c.keyword in data_definition_keywords:
+                found = True
             if not found:
                 err_add(ctx.errors, output.pos,'EXPECTED_DATA_DEF', 'output')
 
